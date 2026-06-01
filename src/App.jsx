@@ -105,7 +105,7 @@ function parseXlsx(buffer) {
       const bokfort = row[0] ? new Date(row[0]) : null;
       const type = row[2] ? String(row[2]).trim() : "Ukjent";
       const beskrivelse = row[3] ? String(row[3]).trim() : "";
-      const utAvKonto = parseFloat(String(row[4]).replace(",", ".")) || 0;
+      const utAvKonto = parseFloat(String(row[4]).replace(/−/g, "-").replace(/\s/g, "").replace(",", ".")) || 0;
       if (utAvKonto === 0) continue;
       allTransactions.push({
         month: sheetName,
